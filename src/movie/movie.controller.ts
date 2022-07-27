@@ -15,8 +15,8 @@ import {
 import { IdValidationPipe } from '../pipes/id.validation.pipe'
 import { CreateMovieDto } from './dto/create-movie.dto'
 import { MovieService } from './movie.service'
-import Auth from 'src/auth/decorators/Auth.decorator'
 import { Types } from 'mongoose'
+import Auth from 'src/auth/decorators/Auth.decorator'
 
 @Controller('movies')
 export class MovieController {
