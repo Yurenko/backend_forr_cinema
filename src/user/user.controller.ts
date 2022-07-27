@@ -18,7 +18,7 @@ import { UpdateDto } from './dto/update.dto'
 import { IdValidationPipe } from 'src/pipes/id.validation.pipe'
 import { UserModel } from './user.model'
 import { Types } from 'mongoose'
-import Auth from 'src/auth/decorators/Auth.decorator'
+import Auth from 'src/auth/decorators/auth.decorator'
 
 @Controller('users')
 export class UserController {
