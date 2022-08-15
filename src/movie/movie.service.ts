@@ -66,7 +66,6 @@ export class MovieService {
 			bigPoster: '',
 			actors: [],
 			genres: [],
-			description: '',
 			poster: '',
 			title: '',
 			videoUrl: '',
@@ -80,11 +79,7 @@ export class MovieService {
 		id: string,
 		dto: CreateMovieDto
 	): Promise<DocumentType<MovieModel> | null> {
-		if (!dto.isSendTelegram) {
-			await this.sendNotifications(dto)
-			dto.isSendTelegram = true
-		}
-
+	
 		return this.movieModel.findByIdAndUpdate(id, dto, { new: true }).exec()
 	}
 
@@ -106,24 +101,5 @@ export class MovieService {
 			.exec()
 	}
 
-	/* Utilites */
-	async sendNotifications(dto: CreateMovieDto) {
-		if (process.env.NODE_ENV !== 'development')
-			await this.telegramService.sendPhoto(dto.poster)
-
-		const msg = `<b>${dto.title}</b>\n\n` + `${dto.description}\n\n`
-
-		await this.telegramService.sendMessage(msg, {
-			reply_markup: {
-				inline_keyboard: [
-					[
-						{
-							url: 'https://okko.tv/movie/free-guy',
-							text: '🍿 Go to watch',
-						},
-					],
-				],
-			},
-		})
-	}
+	
 }
